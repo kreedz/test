@@ -1,0 +1,5 @@
+{
+    "presets": [["env", { "modules": false }], "react"],
+    //"presets": ["env", "react"],
+    "plugins": ["transform-runtime", "react-hot-loader/babel"]
+}
