@@ -1,5 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
+const {CheckerPlugin} = require('awesome-typescript-loader');
+const StyleLintPlugin = require('stylelint-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
 module.exports = {
@@ -7,13 +10,20 @@ module.exports = {
         'react-hot-loader/patch',
         './src/index.tsx'
     ],
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin()
-    ],
     devServer: {
         hot: true,
     },
+    plugins: [
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NamedModulesPlugin(),
+        new CheckerPlugin(),
+        new StyleLintPlugin(),
+        new HtmlWebpackPlugin({
+            template: 'src/index.html',
+            filename: 'index.html',
+            inject: 'body'
+        })
+    ],
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
         modules: [
@@ -63,5 +73,6 @@ module.exports = {
                 ],
             },
         ]
-    }
+    },
+    devtool: 'inline-source-map',
 };
