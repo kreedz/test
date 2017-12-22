@@ -1,27 +1,28 @@
-import React, {SFC} from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react';
+import {render} from 'react-dom';
 import {AppContainer} from 'react-hot-loader';
 import {Provider} from 'react-redux';
 
-import {App} from 'components/App';
-import store from 'store';
+import App from 'components/App';
+import configureStore from 'store';
 
-/*import 'bootstrap/dist/css/bootstrap.css';
-import 'styles/styles.css';*/
 
-const render = (Component: React.ComponentClass) => {
-    ReactDOM.render(
+const rootEl = document.getElementById('root');
+const store = configureStore();
+const renderApp = () =>
+    render(
+        <Provider store={store}>
             <AppContainer>
-                <Component />
-            </AppContainer>,
-        document.getElementById('root')
+                <App/>
+            </AppContainer>
+        </Provider>,
+        rootEl
     );
-};
 
-render(App);
+renderApp();
 
 if (module.hot) {
     module.hot.accept('components/App', () => {
-        alert('accept'); render(App);
+        renderApp();
     });
 }
