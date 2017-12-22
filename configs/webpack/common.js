@@ -1,25 +1,17 @@
-const path = require('path');
-const webpack = require('webpack');
+const {resolve} = require('path');
 const {CheckerPlugin} = require('awesome-typescript-loader');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
+const srcPath = resolve(__dirname, '../../src');
 
 module.exports = {
-    entry: [
-        'react-hot-loader/patch',
-        './src/index.tsx'
-    ],
-    devServer: {
-        hot: true,
-    },
+    context: srcPath,
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-        new webpack.NamedModulesPlugin(),
         new CheckerPlugin(),
         new StyleLintPlugin(),
         new HtmlWebpackPlugin({
-            template: 'src/index.html',
+            template: srcPath + '/index.html',
             filename: 'index.html',
             inject: 'body'
         })
@@ -27,8 +19,8 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
         modules: [
-            path.resolve('./src'),
-            path.resolve('./node_modules')
+            resolve('./src'),
+            resolve('./node_modules')
         ]
     },
     module: {
@@ -73,6 +65,5 @@ module.exports = {
                 ],
             },
         ]
-    },
-    devtool: 'cheap-module-eval-source-map',
+    }
 };

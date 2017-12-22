@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "build": "npm run clean-dist && webpack --config=configs/webpack/prod.js",
+    "clean-dist": "rm -rf dist",
+    "start": "webpack-dev-server --config=configs/webpack/dev.js"
   },
   "author": "",
   "license": "ISC",
@@ -45,9 +47,11 @@
     "tslint-loader": "^3.5.3",
     "tslint-react": "^3.2.0",
     "typescript": "^2.6.2",
+    "uglifyjs-webpack-plugin": "^1.1.4",
     "webpack": "^3.10.0",
     "webpack-dev-middleware": "^2.0.2",
     "webpack-dev-server": "^2.9.7",
-    "webpack-hot-middleware": "^2.21.0"
+    "webpack-hot-middleware": "^2.21.0",
+    "webpack-merge": "^4.1.1"
   }
 }
