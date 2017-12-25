@@ -4,11 +4,11 @@ import {Dispatch} from 'redux';
 import {Action} from 'redux-actions';
 
 import {incFilter} from 'actions';
-import {IFilter} from 'reducers';
-const reactLogo = require('assets/img/react_logo.svg');
+import HelloReact from 'components/HelloReact';
+import {IFilter} from 'models';
 
 
-interface IProps extends IDispatchProps, IStateProps {}
+export interface IProps extends IDispatchProps, IStateProps {}
 
 interface IStateProps {
     filter: IFilter;
@@ -19,17 +19,9 @@ interface IDispatchProps {
 }
 
 class App extends React.Component<IProps, {}> {
-    onClick = () => {
-        this.props.incFilter();
-    }
-
     render() {
         return (
-            <div className="app">
-                <h1 onClick={this.onClick}>12222!</h1>
-                <p>Foo to the barz!!!</p>
-                <img src={reactLogo} height="480"/>
-            </div>
+            <HelloReact {...this.props} />
         );
     }
 }
