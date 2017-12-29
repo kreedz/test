@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import {Route, RouteComponentProps, Switch, withRouter} from 'react-router-dom';
 import {Dispatch} from 'redux';
 import {Action} from 'redux-actions';
 
@@ -8,7 +9,7 @@ import HelloReact from 'components/HelloReact';
 import {IFilter} from 'models';
 
 
-export interface IProps extends IDispatchProps, IStateProps {}
+export interface IProps extends IDispatchProps, IStateProps, RouteComponentProps<any> {}
 
 interface IStateProps {
     filter: IFilter;
@@ -19,9 +20,13 @@ interface IDispatchProps {
 }
 
 class App extends React.Component<IProps, {}> {
+    renderHelloReact = (props: IProps) => () => <HelloReact {...props} />;
+
     render() {
         return (
-            <HelloReact {...this.props} />
+            <Switch>
+                <Route exact path="/test" render={this.renderHelloReact(this.props)} />
+            </Switch>
         );
     }
 }
@@ -29,4 +34,4 @@ class App extends React.Component<IProps, {}> {
 const mapStateToProps = ({filter}: IStateProps) => ({filter});
 const mapDispatchToProps: IDispatchProps = {incFilter};
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
