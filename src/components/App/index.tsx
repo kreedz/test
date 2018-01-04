@@ -19,13 +19,16 @@ interface IDispatchProps {
     incFilter(): (dispatch: Dispatch<void>) => Action<void>;
 }
 
-class App extends React.Component<IProps, {}> {
-    renderHelloReact = (props: IProps) => () => <HelloReact {...props} />;
+const r =
+  <T extends {}>(Component: React.ComponentType<T>, props: T) =>
+    () => <Component {...props} />;
 
+
+class App extends React.Component<IProps, {}> {
     render() {
         return (
             <Switch>
-                <Route exact path="/test" render={this.renderHelloReact(this.props)} />
+                <Route exact path="/test" render={r<IProps>(HelloReact, this.props)} />
             </Switch>
         );
     }
