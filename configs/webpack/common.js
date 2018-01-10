@@ -1,3 +1,4 @@
+const webpack = require('webpack');
 const {resolve} = require('path');
 const {CheckerPlugin} = require('awesome-typescript-loader');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
@@ -14,7 +15,10 @@ module.exports = {
             template: srcPath + '/index.html',
             filename: 'index.html',
             inject: 'body'
-        })
+        }),
+        new webpack.WatchIgnorePlugin([
+            /css\.d\.ts$/
+        ]),
     ],
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
@@ -67,6 +71,28 @@ module.exports = {
                         }
                     }
                 ],
+            },
+            {
+                test: /\.css$/,
+                use: [
+                    {
+                        loader: 'style-loader',
+                        options: {
+                            hmr: true
+                        }
+                    },
+                    {
+                        loader: 'typings-for-css-modules-loader',
+                        options: {
+                            namedExport: true,
+                            sourceMap: true,
+                            modules: true,
+                            camelCase: true,
+                            importLoaders: 1,
+                            localIdentName: '[path][name]__[local]--[hash:base64:5]'
+                        }
+                    }
+                ]
             },
         ]
     }
