@@ -4,6 +4,8 @@ import {AppContainer} from 'react-hot-loader';
 import {Provider} from 'react-redux';
 import {HashRouter} from 'react-router-dom';
 
+import 'bootstrap/dist/css/bootstrap.css';
+
 import App from 'components/App';
 import configureStore from 'store';
 

@@ -4,7 +4,9 @@ const {CheckerPlugin} = require('awesome-typescript-loader');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const srcPath = resolve(__dirname, '../../src');
+const rootPath = resolve(__dirname, '../../');
+const srcPath = resolve(rootPath, 'src');
+const nodeModulesPath = resolve(rootPath, 'node_modules');
 
 module.exports = {
     context: srcPath,
@@ -23,8 +25,8 @@ module.exports = {
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
         modules: [
-            resolve('./src'),
-            resolve('./node_modules')
+            srcPath,
+            nodeModulesPath
         ]
     },
     module: {
@@ -48,7 +50,7 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(jpe?g|png|gif|svg)$/i,
+                test: /\.(jpe?g|png|gif|svg|eot)$/i,
                 use: [
                     {
                         loader: 'file-loader',
@@ -73,7 +75,16 @@ module.exports = {
                 ],
             },
             {
+                test: [/\.woff?$/, /\.woff2?$/, /\.ttf?$/],
+                use: [
+                    {
+                        loader: 'url-loader'
+                    }
+                ]
+            },
+            {
                 test: /\.css$/,
+                include: srcPath,
                 use: [
                     {
                         loader: 'style-loader',
@@ -94,6 +105,18 @@ module.exports = {
                     }
                 ]
             },
+            {
+                test: /\.css$/,
+                include: nodeModulesPath,
+                use: [
+                    {
+                        loader: 'style-loader'
+                    },
+                    {
+                        loader: 'css-loader',
+                    }
+                ]
+            }
         ]
     }
 };
