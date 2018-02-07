@@ -12,7 +12,7 @@ describe('A suite', () => {
         expect(shallow(<Header />).contains(<p className="text-uppercase">Foo to the bar!!!</p>)).toBe(true);
     });
 
-    it('should be selectable by class "foo"', () => {
+    it('should be selectable by class "text-uppercase"', () => {
         expect(shallow(<Header />).is('.text-uppercase')).toBe(true);
     });
 

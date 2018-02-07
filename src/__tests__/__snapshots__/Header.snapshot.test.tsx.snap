@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component renders the header correctly 1`] = `
+<p
+  className="text-uppercase"
+>
+  Foo to the bar!!!
+</p>
+`;
