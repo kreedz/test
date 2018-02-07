@@ -1,11 +1,8 @@
-import {configure, mount, render, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import {mount, render, shallow} from 'enzyme';
 import React from 'react';
 
 import Header from '../components/Header';
 
-
-configure({ adapter: new Adapter() });
 
 describe('A suite', () => {
     it('should render without throwing an error', () => {
